@@ -1,0 +1,50 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: profx-crawl-cronjob
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: profx-crawl-cronjob
+              image: index.docker.io/kenanbek/profx:latest
+              imagePullPolicy: Always
+              command: ["/profx",  "-crawl"]
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 50Mi
+                requests:
+                  cpu: 10m
+                  memory: 10Mi
+              env:
+                - name: DBC_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: dbc
+                      key: username
+                - name: DBC_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: dbc
+                      key: password
+                - name: DBC_READ_HOST
+                  value: "private-kn-sfo2-dbc-do-user-7153629-0.db.ondigitalocean.com"
+                - name: DBC_READ_PORT
+                  value: "25060"
+                - name: DBC_WRITE_HOST
+                  value: "private-kn-sfo2-dbc-do-user-7153629-0.db.ondigitalocean.com"
+                - name: DBC_WRITE_PORT
+                  value: "25060"
+                - name: DBC_SCHEMA
+                  value: "profx"
+                - name: PROFX_RUN_COUNT
+                  value: "0"
+                - name: PROFX_RUN_INTERVAL
+                  value: "600" # every 10 minutes
+          imagePullSecrets:
+            - name: dhregcred
+          restartPolicy: OnFailure

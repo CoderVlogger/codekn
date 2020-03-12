@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flash
+  labels:
+    app: flash
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flash
+  template:
+    metadata:
+      labels:
+        app: flash
+    spec:
+      containers:
+        - name: flash
+          image: index.docker.io/kenanbek/flash:0.7.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+          ports:
+            - name: http
+              containerPort: 8080
+      imagePullSecrets:
+      - name: dhregcred

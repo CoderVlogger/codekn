@@ -1,0 +1,44 @@
+version: 0.5
+
+env:
+  FLASH_PORT: 80
+
+networks:
+    development:
+        hosts:
+            - root@157.245.180.227
+
+commands:
+    compile:
+        desc: Build application version
+        local: cd ./src && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o flash -v ./cmd/flash.go
+    upload-bin:
+        desc: Upload source files to all hosts
+        upload:
+          - src: ./src/flash
+            dst: /root/flash/
+    start-bin:
+        desc: Start executable
+        run: FLASH_PORT=$FLASH_PORT /root/flash/src/flash &>/dev/null &
+    upload-src:
+        desc: Upload source files to all hosts
+        upload:
+          - src: ./src
+            dst: /root/flash/
+    build:
+        desc: Build Docker image
+        run: cd /root/flash/src
+        run: docker build -t kn:flash .
+    start:
+        desc: Start Docker image
+        run: docker run -p 80:8080 kn/flash || exit 0
+
+targets:
+    deploy-bin:
+        - compile
+        - upload-bin
+        - start-bin
+    deploy-docker:
+        - upload-src
+        - build
+        - start

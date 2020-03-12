@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profx
+  labels:
+    app: profx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profx
+  template:
+    metadata:
+      labels:
+        app: profx
+    spec:
+      containers:
+        - name: profx
+          image: index.docker.io/kenanbek/profx:0.5.2
+          imagePullPolicy: Always
+          command: ["/profx",  "-crawl"]
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+          env:
+            - name: DBC_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dbc
+                  key: username
+            - name: DBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dbc
+                  key: password
+            - name: DBC_READ_HOST
+              value: "private-kn-sfo2-dbc-do-user-7153629-0.db.ondigitalocean.com"
+            - name: DBC_READ_PORT
+              value: "25060"
+            - name: DBC_WRITE_HOST
+              value: "private-kn-sfo2-dbc-do-user-7153629-0.db.ondigitalocean.com"
+            - name: DBC_WRITE_PORT
+              value: "25060"
+            - name: DBC_SCHEMA
+              value: "profx"
+            - name: PROFX_RUN_COUNT
+              value: "0"
+            - name: PROFX_RUN_INTERVAL
+              #value: "1800" # every 30 minutes
+              #value: "300" # every 5 minutes
+              value: "3600" # every 1 hour
+      imagePullSecrets:
+        - name: dhregcred

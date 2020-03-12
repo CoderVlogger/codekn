@@ -1,0 +1,7 @@
+# Ignore editor files
+.idea
+.vscode
+*.swp
+
+# Ignore coverage files
+coverage.txt
