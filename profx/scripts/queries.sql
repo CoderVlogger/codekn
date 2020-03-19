@@ -14,6 +14,7 @@ SELECT COUNT(*) FROM profx.links;
 TRUNCATE TABLE profx.links;
 
 SELECT * FROM profx.resources ORDER BY created DESC;
+SELECT created, source, url FROM profx.resources ORDER BY created DESC;
 SELECT * FROM profx.resources ORDER BY created DESC LIMIT 50;
 SELECT COUNT(*) FROM profx.resources;
 TRUNCATE TABLE profx.resources;
