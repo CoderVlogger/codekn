@@ -3,6 +3,7 @@ package profx
 import (
 	"log"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly"
 	"github.com/pkg/errors"
@@ -21,7 +22,7 @@ func NewCollyScraper() *CollyScraper {
 func (p *CollyScraper) GetLinks(url string) ([]string, error) {
 	var urls []string
 	collector := colly.NewCollector()
-	// collector.SetRequestTimeout(3 * time.Second)
+	collector.SetRequestTimeout(3 * time.Second)
 
 	collector.OnHTML("a", func(e *colly.HTMLElement) {
 		url := e.Attr("href")

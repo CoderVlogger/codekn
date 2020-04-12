@@ -8,7 +8,7 @@ deploy/docker:
 
 .PHONY: st/run
 st/%/run:
-	cat ./target | vegeta attack -rate=50/1s -duration=30s > results.$*.bin
+	cat ./target | vegeta attack -rate=100/1s -duration=300s > results.$*.bin
 
 .PHONY: st/report
 st/%/report:

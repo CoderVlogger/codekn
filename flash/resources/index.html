@@ -1,0 +1,13 @@
+<h1>{{.Title}}</h1>
+<ul>
+  {{range .Articles}}
+    <li>
+      <small>[{{.Created}}]</small>
+      <a href="{{.URL}}" target="_blank">{{.URL}}</a>
+
+      {{if .Source}}
+        <small>({{.Source}})</small>
+      {{end}}
+    </li>
+  {{end}}
+</ul>
