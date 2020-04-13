@@ -4,6 +4,8 @@ KN is a public and open-source project used to present the development process o
 
 The purpose of the project is to build a platform for developers. As a first step, it gathers articles and engineering post URLs from the authority websites and provides a useful user interface for developers.
 
+At the same time, I also want to show the process of creating software projects for beginners. It's planned to include project examples for Go, Python, and front-end technologies like JavaScript and React for web, and Flutter for mobile.
+
 Tech stack: Go-lang, Docker, Kubernetes, MySQL.
 
 ## Includes
