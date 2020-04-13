@@ -8,6 +8,8 @@ At the same time, I also want to show the process of creating software projects 
 
 Tech stack: Go-lang, Docker, Kubernetes, MySQL.
 
+In [Wiki](https://github.com/CoderVlogger/codekn/wiki) you can find link to YouTube videos with coding sessions and tutorials.
+
 ## Includes
 
 ### ProfX
