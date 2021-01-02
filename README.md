@@ -1,3 +1,5 @@
+Note: Outdated public clone of CodeKN/CodeKN. The current version of CodeKN is not available publicly yet.
+
 # CodeKN
 
 KN is a public and open-source project used to present the development process of the real-world project.
