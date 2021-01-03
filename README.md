@@ -1,4 +1,4 @@
-Note: Outdated public clone of CodeKN/CodeKN. The current version of CodeKN is not available publicly yet.
+Note: Outdated public clone of CodeKN/CodeKN. The current version of CodeKN is not publicly available yet.
 
 # CodeKN
 
